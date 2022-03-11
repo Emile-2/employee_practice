@@ -195,45 +195,49 @@ def view_total():
 
 class Employee:
 
-    def __init__(self, f_name, l_name, y_ob, m_ob, d_ob, position, graduated):
-        self.first_name = f_name
-        self.last_name = l_name
-        self.year_of_birth = y_ob
-        self.month_of_birth = m_ob
-        self.day_of_birth = d_ob
-        self.position = position
-        self.graduation = graduated
+    def __init__(self):
+        self.first_name = read_name("First Name")
+        self.last_name = read_name("Last Name")
+        self.year_of_birth = read_year()
+        self.month_of_birth = read_month()
+        self.day_of_birth = read_day()
+        self.position = read_position()
+        self.graduation = read_is_graduated()
+
 
     def print_data(self):
-        print(self.first_name, self.last_name, self.year_of_birth, self.month_of_birth, self.day_of_birth, self.position, self.graduation)
+
+        self.collection = self.first_name, self.last_name, self.year_of_birth, self.month_of_birth, self.day_of_birth, self.position, self.graduation
+
+        return self.collection
 
 
-
-
-
-    def first_name(self):
-        pass
-
+    def push_to_dict(self):
+        for info in self.collection:
+            print(info)
+            # all_employees_dict[id]["first_name"] = info
+            # all_employees_dict[id]["last_name"] = info
+            # all_employees_dict[id]["position"] = info
+            # all_employees_dict[id]["birth_year"] = info
+            # all_employees_dict[id]["birth_month"] = info
+            # all_employees_dict[id]["birth_day"] = info
+            # all_employees_dict[id]["is_graduated"] = info
 
 
 if __name__ == "__main__":
     all_employees_dict = {
         2: {'first_name': 'test', 'last_name': 'data', 'position': 'engineer', 'birth_year': 1972, 'birth_month': 8,
             'birth_day': 14, 'is_graduated': True}}
+
     while True:
         option = read_option()
 
         if option == "add":
             print("The user wants to add an Employee")
-            add_new_employee = Employee(f"{read_name('First Name')}",
-                                        f"{read_name('Last Name')}",
-                                        f"{read_year()}",
-                                        f"{read_month()}",
-                                        f"{read_day()}",
-                                        f"{read_position()}",
-                                        f"{read_is_graduated()}")
-
+            add_new_employee = Employee()
             add_new_employee.print_data()
+            add_new_employee.push_to_dict()
+
 
 
 
