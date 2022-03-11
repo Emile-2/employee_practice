@@ -27,6 +27,16 @@ def read_name(text):
         else:
             print(f"Error, The Employee {text} Name should be at least 2 Characters")
 
+def read_position():
+    while True:
+        position = input("Please Enter The Employee Position:")
+        position = position.strip()
+
+        if len(position) >= 1:
+            return position
+        else:
+            print("Error, The Employee Position should be at least 1 Characters")
+
 def read_year():
     while True:
         year_str = input("Please Enter the Employee Birth Year:")
@@ -55,16 +65,6 @@ def read_month():
         else:
             print("Error, The Employee Birth Month should be a number")
 
-def read_position():
-    while True:
-        position = input("Please Enter The Employee Position:")
-        position = position.strip()
-
-        if len(position) >= 1:
-            return position
-        else:
-            print("Error, The Employee Position should be at least 1 Characters")
-
 def read_day():
     while True:
         day_str = input("Please Enter the Employee Birth Day:")
@@ -92,6 +92,32 @@ def read_is_graduated():
         else:
             print("Error, Please Enter y or n")
 
+def create_employee_dictionary():
+    employee_first_name = read_name("First Name")
+    employee_last_name  = read_name("Last Name")
+    employee_position   = read_position()
+
+    employee_birth_year = read_year()
+    employee_birth_month = read_month()
+    employee_birth_day   = read_day()
+
+    employee_is_graduated = read_is_graduated()
+
+    employee_id = read_employee_id()
+
+    employee = {
+        "id": employee_id,
+        "first_name": employee_first_name,
+        "last_name": employee_last_name,
+        "position": employee_position,
+        "birth_year": employee_birth_year,
+        "birth_month": employee_birth_month,
+        "birth_day": employee_birth_day,
+        "is_graduated": employee_is_graduated
+    }
+
+    return employee
+
 def read_employee_id():
     while True:
         id_str = input("Please Enter the Employee ID:")
@@ -105,6 +131,67 @@ def read_employee_id():
                 print("Error, The Employee ID should be positive number")
         else:
             print("Error, The Employee ID should be a number")
+
+def print_all_employees_data():
+    for employee_id_key in all_employees_dict:
+        print(f"The data of the employee with Employee_ID = {employee_id_key}")
+        print(all_employees_dict[employee_id_key])
+
+def read_field_option():
+    while True:
+        field_option = input("Please Enter the field you want to update: first_name, last_name, position, birth_year, birth_month, birth_day, is_graduated:")
+        field_option = field_option.strip()
+
+        if field_option in ["first_name", "last_name", "position", "birth_year", "birth_month", "birth_day", "is_graduated"]:
+            return field_option
+        else:
+            print("Please enter one of the mentioned fields")
+
+def update_employee_data(employee_id):
+
+    field_option = read_field_option()
+
+    if field_option == "first_name":
+        new_first_name = read_name("First Name")
+        #employee_record = all_employees_dict[employee_id]
+        #employee_record['first_name'] = new_first_name
+        all_employees_dict[employee_id]['first_name'] = new_first_name
+
+    elif field_option == "last_name":
+        new_last_name = read_name("Last Name")
+        all_employees_dict[employee_id]['last_name'] = new_last_name
+
+    elif field_option == "position":
+        new_position = read_position()
+        all_employees_dict[employee_id]['position'] = new_position
+
+    elif field_option == "birth_year":
+        new_birth_year = read_year()
+        all_employees_dict[employee_id]['birth_year'] = new_birth_year
+
+    elif field_option == "birth_month":
+        new_birth_month = read_month()
+        all_employees_dict[employee_id]['birth_month'] = new_birth_month
+
+    elif field_option == "birth_day":
+        new_birth_day = read_day()
+        all_employees_dict[employee_id]['birth_day'] = new_birth_day
+
+    elif field_option == "is_graduated":
+        new_is_graduated = read_year()
+        all_employees_dict[employee_id]['is_graduated'] = new_is_graduated
+
+    else:
+        print("Error, Please enter a valid option")
+
+def view_single_employee(employee_id):
+
+    id = employee_id
+    print(all_employees_dict[id])
+
+def view_total():
+    total_employees = len(all_employees_dict.keys())
+    print(f"There are {total_employees} employees")
 
 class Employee:
 
@@ -120,15 +207,8 @@ class Employee:
     def print_data(self):
         print(self.first_name, self.last_name, self.year_of_birth, self.month_of_birth, self.day_of_birth, self.position, self.graduation)
 
-    def save_data(self):
-        saved_data = self.first_name, self.last_name, self.year_of_birth, self.month_of_birth, self.day_of_birth, self.position, self.graduation
-        return saved_data
 
-    def add_to_dict(self, id):
 
-        employee_list = save_data()
-
-        return employee_list
 
 
     def first_name(self):
@@ -153,7 +233,9 @@ if __name__ == "__main__":
                                         f"{read_position()}",
                                         f"{read_is_graduated()}")
 
-            print(add_new_employee.saved_data())
+            add_new_employee.print_data()
+
+
 
             # employee_dict = create_employee_dictionary()
             #
