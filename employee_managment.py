@@ -260,14 +260,4 @@ if __name__ == "__main__":
 
 
 
-        # main_key = employee_dict.keys()
-        #
-        # for employee_id in main_key:  # iterating through keys in employee_dict
-        #     unique_id = employee_dict[employee_id]["id"]
-        #     first_name = employee_dict[employee_id]["first_name"]
-        #     last_name = employee_dict[employee_id]["last_name"]
-        #
-        #     # print(employee_id)  # printing the keys in employee dict (first names)
-        #     print(unique_id)
-        #     print(first_name)# accessing dict at thoses keys to print the values stored there
-        #     # employee_dict[employee_id].print_name()  # accesing employee_dict at employee_key key locations to use self.print_name to print those keys
+
