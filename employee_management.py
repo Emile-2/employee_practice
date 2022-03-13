@@ -229,7 +229,7 @@ if __name__ == "__main__":
                                 read_month(),
                                 read_day(),
                                 read_is_graduated()
-                                )  # using my input to fill in f_name
+                                )  # using my input
 
             employee.print_name()  # using object method to print name of person
             employee_dict[employee.get_id()] = employee.add_to_dict()  # adding a dictionary to the dictionary using id as the key
@@ -251,6 +251,15 @@ if __name__ == "__main__":
             update_option = read_field_option()
             employee_dict[employee.get_id()][update_option] = employee.change_attribute(update_option)
 
+        elif options == "id":
+            print("The user wants to view the data of a particular employee by ID")
+            print(employee_dict[employee.get_id()])
+
+
+        elif options == "total":
+            print("The user wants to view the total amount of employees")
+            total_employees = len(employee_dict.keys())
+            print(f"There are {total_employees} employees")
 
 
 
@@ -261,4 +270,4 @@ if __name__ == "__main__":
 
 
 
-####gsdg
+
