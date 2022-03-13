@@ -9,14 +9,6 @@ class Employee:
         self.day_of_birth = d_ob
         self.is_graduated = is_graduated
 
-    # def check_first_name(self):
-    #     if len(self.first_name) < 2:
-    #         new_name = input("Error, Insert Name with more than 1 character")
-    #         self.new_first_name = new_name
-    #         return self.new_first_name
-    #     else:
-    #         return self.first_name
-
     def print_name(self):
         print(self.first_name, self.last_name)
 
@@ -44,6 +36,35 @@ class Employee:
     def get_id(self):
         return self.employee_id
 
+    def change_attribute(self, update_attribute):
+        if update_attribute == "first_name":
+            new_first_name = read_name("New First Name")
+            return new_first_name
+
+        elif update_attribute == "last_name":
+            new_last_name = read_name("New last Name")
+            return new_last_name
+
+        elif update_attribute == "position":
+            new_position = read_position()
+            return new_position
+
+        elif update_attribute == "year_of_birth":
+            new_year = read_year()
+            return new_year
+
+        elif update_attribute == "month_of_birth":
+            new_month = read_month()
+            return new_month
+
+        elif update_attribute == "day_of_birth":
+            new_day = read_day()
+            return new_day
+
+        elif update_attribute == "is_graduated":
+            new_is_graduated = read_is_graduated()
+            return new_is_graduated
+
     def add_to_dict(self):
         employee_id_value = self.employee_id
         first_name_value = self.first_name
@@ -60,51 +81,10 @@ class Employee:
                               "position" : position_value,
                               "year_of_birth" : year_of_birth_value,
                               "month_of_birth" : month_of_birth_value,
-                              "day_of_birth_value" : day_of_birth_value,
-                              "is_graduated_value" : is_graduated_value}
-        print(employee_temp_dict)
+                              "day_of_birth" : day_of_birth_value,
+                              "is_graduated" : is_graduated_value}
+        # print(employee_temp_dict)
         return employee_temp_dict
-
-
-    def update_employee_data(self,employee_id): #change the whole line? from dictionary push values into Employee() change the individual field and return to dict
-
-        # id_to_change = employee_id
-
-        employee_dict
-        for employee_id in employee_dict.key
-
-        field_option = read_field_option()
-
-        if field_option == "first_name":
-            new_first_name = read_name("Last Name")
-            employee_dict[employee_id]['first_name'] = new_first_name
-
-        elif field_option == "last_name":
-            new_last_name = read_name("Last Name")
-            employee_dict[employee_id]['last_name'] = new_last_name
-
-        elif field_option == "position":
-            new_position = read_position()
-            employee_dict[employee_id]['position'] = new_position
-
-        elif field_option == "birth_year":
-            new_birth_year = read_year()
-            employee_dict[employee_id]['birth_year'] = new_birth_year
-
-        elif field_option == "birth_month":
-            new_birth_month = read_month()
-            employee_dict[employee_id]['birth_month'] = new_birth_month
-
-        elif field_option == "birth_day":
-            new_birth_day = read_day()
-            employee_dict[employee_id]['birth_day'] = new_birth_day
-
-        elif field_option == "is_graduated":
-            new_is_graduated = read_year()
-            employee_dict[employee_id]['is_graduated'] = new_is_graduated
-
-        else:
-            print("Error, Please enter a valid option")
 
 def read_field_option():
     while True:
@@ -127,18 +107,18 @@ def read_option():
     while True:
         user_option = input("""
         This is a list of your options: 
-        add: Add an Employee 
-        remove: Remove an Employee 
-        list: List the Employees
-        update: Update Employee Data 
-        id: View employee data by ID
-        total: View total amount of employees 
-        exit: Exit the app
+        Add: Add an Employee 
+        Remove: Remove an Employee 
+        List: List the Employees
+        Update: Update Employee Data 
+        ID: View employee data by ID
+        Total: View total amount of employees 
+        Exit: Exit the app
         Enter Selected Option:""")
         user_option = user_option.strip()
 
-        if user_option in ["add", "remove", "update", "list", "exit", "id", "total"]:
-            return user_option
+        if user_option.lower() in ["add", "remove", "update", "list", "exit", "id", "total"]:
+            return user_option.lower()
         else:
             print("Error, You should select one of the options in the list")
 
@@ -233,12 +213,7 @@ def read_is_graduated():
 
 if __name__ == "__main__":
 
-    employee_dict = {10: {"id": 10,
-                          "first_name": "test",
-                          "last_name": "data"
-                          }
-
-                     }
+    employee_dict = {}
     while True:
 
         options = read_option()
@@ -259,6 +234,7 @@ if __name__ == "__main__":
             employee.print_name()  # using object method to print name of person
             employee_dict[employee.get_id()] = employee.add_to_dict()  # adding a dictionary to the dictionary using id as the key
             print("----------------------------------")
+            print(employee_dict)
 
         elif options == "remove":
 
@@ -272,7 +248,9 @@ if __name__ == "__main__":
 
         elif options == "update":
             print("The user wants to update an employee")
-            Employee.update_employee_data(10)
+            update_option = read_field_option()
+            employee_dict[employee.get_id()][update_option] = employee.change_attribute(update_option)
+
 
 
 
