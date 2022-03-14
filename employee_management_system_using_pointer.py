@@ -261,12 +261,12 @@ if __name__ == "__main__":
             print("The user wants to update an employee")
 
             employee_dict[employee.get_id()].update(read_field_option())
-            # update_option = read_field_option()
-            # employee_dict[employee.get_id()][update_option] = employee.change_attribute(update_option)
 
         elif options == "id":
             print("The user wants to view the data of a particular employee by ID")
-            print(employee_dict[employee.get_id()])
+            id_to_check = read_employee_id()
+
+            print(employee_dict[id_to_check].print_all())
 
 
         elif options == "total":
